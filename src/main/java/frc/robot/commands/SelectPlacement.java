@@ -49,8 +49,8 @@ public class SelectPlacement extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("---BEFORE---");
-        Constants.PlacementSelector.printArray();
+        // System.out.println("---BEFORE---");
+        // Constants.PlacementSelector.printArray();
         Constants.PlacementSelector.move(m_Selection);
     }
 
@@ -62,8 +62,8 @@ public class SelectPlacement extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        System.out.println("---AFTER---");
-        Constants.PlacementSelector.printArray();
+        // System.out.println("---AFTER---");
+        // Constants.PlacementSelector.printArray();
     }
 
     // Returns true when the command should end.

@@ -11,6 +11,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -33,8 +39,10 @@ public class Constants {
         private static boolean[][] array = new boolean[4][2];
         private static int currentRow = 0;
         private static int currentCol = 0;
-    
+        private static GenericEntry[][] array1 = new GenericEntry[4][2];
+
         public PlacementSelector() {
+        
             // Initially set the first element to true
             array[currentRow][currentCol] = true;
         }
@@ -43,6 +51,7 @@ public class Constants {
             // Set the current true element to false
             array[currentRow][currentCol] = false;
             SmartDashboard.putBoolean(currentRow+"-"+currentCol, false);
+            array1[currentRow][currentCol].setBoolean(false);
     
             if (direction == Constants.DPAD.kDown && currentRow > 0) {
                 currentRow--;
@@ -57,6 +66,7 @@ public class Constants {
             // Set the new position to true
             array[currentRow][currentCol] = true;
             SmartDashboard.putBoolean(currentRow+"-"+currentCol, true);
+            array1[currentRow][currentCol].setBoolean(true);
         }
         public static int getCurrentCol() { 
             return currentCol;
@@ -64,6 +74,21 @@ public class Constants {
         public static int getCurrentRow() { 
             return currentRow;
         }
+
+        public static void initializeTab() { 
+            // Add placement selector to REEFSCAPE tab
+            ShuffleboardTab mainTab = Shuffleboard.getTab("REEFSCAPE");
+            for (int i = 0; i<array1.length; i++){
+                for (int j = 0; j<array1[i].length; j++){
+                    array1[i][j] = mainTab.add(i + "-" + j, false).withWidget(BuiltInWidgets.kBooleanBox).withPosition(j,Math.abs(i-3)).getEntry();
+                }
+            }
+            array1[currentRow][currentCol].setBoolean(true);
+
+        }
+
+
+
    
         public static void printArray() { 
             for (boolean[] row : array) {
