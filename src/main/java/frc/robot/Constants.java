@@ -39,7 +39,7 @@ public class Constants {
         private static boolean[][] array = new boolean[4][2];
         private static int currentRow = 0;
         private static int currentCol = 0;
-        private static GenericEntry[][] array1 = new GenericEntry[4][2];
+        //private static GenericEntry[][] array1 = new GenericEntry[4][2];
 
         public PlacementSelector() {
         
@@ -51,7 +51,7 @@ public class Constants {
             // Set the current true element to false
             array[currentRow][currentCol] = false;
             SmartDashboard.putBoolean(currentRow+"-"+currentCol, false);
-            array1[currentRow][currentCol].setBoolean(false);
+            //array1[currentRow][currentCol].setBoolean(false);
     
             if (direction == Constants.DPAD.kDown && currentRow > 0) {
                 currentRow--;
@@ -66,7 +66,7 @@ public class Constants {
             // Set the new position to true
             array[currentRow][currentCol] = true;
             SmartDashboard.putBoolean(currentRow+"-"+currentCol, true);
-            array1[currentRow][currentCol].setBoolean(true);
+            //array1[currentRow][currentCol].setBoolean(true);
         }
         public static int getCurrentCol() { 
             return currentCol;
@@ -77,14 +77,31 @@ public class Constants {
 
         public static void initializeTab() { 
             // Add placement selector to REEFSCAPE tab
-            ShuffleboardTab mainTab = Shuffleboard.getTab("REEFSCAPE");
-            for (int i = 0; i<array1.length; i++){
-                for (int j = 0; j<array1[i].length; j++){
-                    array1[i][j] = mainTab.add(i + "-" + j, false).withWidget(BuiltInWidgets.kBooleanBox).withPosition(j,Math.abs(i-3)).getEntry();
+            //ShuffleboardTab mainTab = Shuffleboard.getTab("REEFSCAPE");
+            // for (int i = 0; i<array1.length; i++){
+            //     for (int j = 0; j<array1[i].length; j++){
+            //         array1[i][j] = mainTab.add(i + "-" + j, false).withWidget(BuiltInWidgets.kBooleanBox).withPosition(j,Math.abs(i-3)).getEntry();
+            //     }
+            // }
+
+            // SmartDashboard.putBoolean("0-0", true);
+            // SmartDashboard.putBoolean("1-0", false);
+            // SmartDashboard.putBoolean("2-0", false);
+            // SmartDashboard.putBoolean("3-0", false);
+            // SmartDashboard.putBoolean("0-1", false);
+            // SmartDashboard.putBoolean("1-1", false);
+            // SmartDashboard.putBoolean("2-1", false);
+            // SmartDashboard.putBoolean("3-1", false);
+            
+            array[currentRow][currentCol] = true;
+            for (int i = 0; i<array.length; i++){
+                for (int j = 0; j<array[i].length; j++){
+                    array[i][j] = false;
+                    SmartDashboard.putBoolean(i+"-"+j, false);
                 }
             }
-            array1[currentRow][currentCol].setBoolean(true);
-
+            array[currentRow][currentCol] = true;
+            SmartDashboard.putBoolean(currentRow+"-"+currentCol, true);
         }
 
 
